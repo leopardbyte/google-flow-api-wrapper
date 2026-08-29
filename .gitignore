@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Authentication & Local Session Secrets (CRITICAL)
+session_state.json
+*.session
+*.token
+*.cookie
+.env
+
+# Generated Output Media
+*.mp4
+*.webm
+*.png
+*.jpg
+*.jpeg
+*.gif
+!examples/*.jpg
+!examples/*.png
+
+# Local Environment & IDEs
+.venv/
+env/
+venv/
+.agents/
+scratch/
+.idea/
+.vscode/
+*.log
+
+# Captured Diagnostic Dumps
+captured_requests.json
+debug_*.png
+GeminiWatermarkTool*

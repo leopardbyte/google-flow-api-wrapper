@@ -1,0 +1,758 @@
+{
+  "studio_canvas_elements": [
+    {
+      "index": 0,
+      "tag": "button",
+      "type": "",
+      "text": "Hide",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "glue-cookie-notification-bar__accept",
+      "data_testid": ""
+    },
+    {
+      "index": 1,
+      "tag": "button",
+      "type": "",
+      "text": "arrow_back\nGo Back",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-7cbbf1fc-2 ewGlDn famhRe jjdvrX",
+      "data_testid": ""
+    },
+    {
+      "index": 2,
+      "tag": "input",
+      "type": "text",
+      "text": "",
+      "placeholder": "",
+      "aria_label": "Editable text",
+      "id": "",
+      "class": "sc-b2595011-2 eIJedz",
+      "data_testid": ""
+    },
+    {
+      "index": 3,
+      "tag": "button",
+      "type": "button",
+      "text": "more_vert\nMore options",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r21:",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-26aa1721-3 ewGlDn famhRe dUDRen",
+      "data_testid": ""
+    },
+    {
+      "index": 4,
+      "tag": "button",
+      "type": "",
+      "text": "search\nSearch",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-cae65d1b-2 ewGlDn famhRe dLeufD",
+      "data_testid": ""
+    },
+    {
+      "index": 5,
+      "tag": "input",
+      "type": "text",
+      "text": "",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-cae65d1b-3 dguROl",
+      "data_testid": "search-input"
+    },
+    {
+      "index": 6,
+      "tag": "button",
+      "type": "button",
+      "text": "filter_list\nSort & Filter",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r23:",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-2 fPutAP blvbdy sc-98525c58-8 iQjEOG",
+      "data_testid": ""
+    },
+    {
+      "index": 7,
+      "tag": "button",
+      "type": "button",
+      "text": "add\nAdd Media",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r25:",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-5c4c0aea-1 ewGlDn famhRe eqhuae",
+      "data_testid": ""
+    },
+    {
+      "index": 8,
+      "tag": "button",
+      "type": "",
+      "text": "help\nProduct Help",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-51397942-2 ewGlDn famhRe kCsEmL",
+      "data_testid": ""
+    },
+    {
+      "index": 9,
+      "tag": "button",
+      "type": "button",
+      "text": "settings_2\nView Settings",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r29:",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-a4925f7f-6 ewGlDn famhRe gdBgFb",
+      "data_testid": ""
+    },
+    {
+      "index": 10,
+      "tag": "button",
+      "type": "button",
+      "text": "more_vert\nMore",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r2c:",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-49f300e5-1 ewGlDn famhRe gJhmhm",
+      "data_testid": ""
+    },
+    {
+      "index": 11,
+      "tag": "button",
+      "type": "",
+      "text": "PRO",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-a14123c8-0 iNGyoc",
+      "data_testid": ""
+    },
+    {
+      "index": 12,
+      "tag": "button",
+      "type": "",
+      "text": "dashboard\nAll Media",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 sc-7e7bc024-0 ewGlDn lnCuH fqbaql jcMEtI",
+      "data_testid": ""
+    },
+    {
+      "index": 13,
+      "tag": "button",
+      "type": "",
+      "text": "accessibility_new\nCharacters",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql",
+      "data_testid": ""
+    },
+    {
+      "index": 14,
+      "tag": "button",
+      "type": "",
+      "text": "movie\nView scenes",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql",
+      "data_testid": ""
+    },
+    {
+      "index": 15,
+      "tag": "button",
+      "type": "",
+      "text": "apps_spark_2\nTools",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql",
+      "data_testid": ""
+    },
+    {
+      "index": 16,
+      "tag": "button",
+      "type": "",
+      "text": "delete\nView Trash",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql",
+      "data_testid": ""
+    },
+    {
+      "index": 17,
+      "tag": "button",
+      "type": "",
+      "text": "left_panel_close\nCollapse",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql",
+      "data_testid": ""
+    },
+    {
+      "index": 18,
+      "tag": "button",
+      "type": "",
+      "text": "Surreal Furry Furniture\nA single colored piece of furniture with long single col",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-2 fPutAP blvbdy sc-d393a63f-6 gAGkIl",
+      "data_testid": ""
+    },
+    {
+      "index": 19,
+      "tag": "button",
+      "type": "",
+      "text": "Make a Story\nHelp me create a story by visualizing different options, creating a",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-2 fPutAP blvbdy sc-d393a63f-6 gzpixc",
+      "data_testid": ""
+    },
+    {
+      "index": 20,
+      "tag": "button",
+      "type": "",
+      "text": "Serpentine Traffic Jam\nBack view of a long thin single lane twisty infinite road",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-2 fPutAP blvbdy sc-d393a63f-6 gAGkIl",
+      "data_testid": ""
+    },
+    {
+      "index": 21,
+      "tag": "div",
+      "type": "",
+      "text": "What do you want to create?",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-1c9f7009-0 gvAbJD sc-26b30722-6 jwWpiy",
+      "data_testid": ""
+    },
+    {
+      "index": 22,
+      "tag": "button",
+      "type": "button",
+      "text": "add_2\nCreate",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-253cad92-0 ewGlDn famhRe joSmHx",
+      "data_testid": ""
+    },
+    {
+      "index": 23,
+      "tag": "button",
+      "type": "button",
+      "text": "Agent",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-59223abb-3 dmZGYv",
+      "data_testid": ""
+    },
+    {
+      "index": 24,
+      "tag": "button",
+      "type": "button",
+      "text": "\ud83c\udf4c Nano Banana 2\ncrop_16_9\nx2",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r2l:",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-1 fPutAP jmLZrS sc-93abd9dc-1 ldbhld",
+      "data_testid": ""
+    },
+    {
+      "index": 25,
+      "tag": "button",
+      "type": "",
+      "text": "arrow_forward\nCreate",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-26b30722-5 ewGlDn famhRe jDvIwb",
+      "data_testid": ""
+    },
+    {
+      "index": 26,
+      "tag": "input",
+      "type": "file",
+      "text": "",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "",
+      "class": "sc-dcc7b7da-0 fhJvUC",
+      "data_testid": ""
+    },
+    {
+      "index": 27,
+      "tag": "textarea",
+      "type": "",
+      "text": "",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "g-recaptcha-response-100000",
+      "class": "g-recaptcha-response",
+      "data_testid": ""
+    },
+    {
+      "index": 28,
+      "tag": "button",
+      "type": "button",
+      "text": "image\nImage",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r32:-trigger-IMAGE",
+      "class": "sc-eb68e7f-2 jrTHnf flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 29,
+      "tag": "button",
+      "type": "button",
+      "text": "play_circle\nVideo",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r32:-trigger-VIDEO",
+      "class": "sc-eb68e7f-2 jrTHnf flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 30,
+      "tag": "button",
+      "type": "button",
+      "text": "crop_16_9\n16:9",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r35:-trigger-LANDSCAPE",
+      "class": "sc-eb68e7f-2 dNQytQ flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 31,
+      "tag": "button",
+      "type": "button",
+      "text": "crop_landscape\n4:3",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r35:-trigger-LANDSCAPE_4_3",
+      "class": "sc-eb68e7f-2 dNQytQ flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 32,
+      "tag": "button",
+      "type": "button",
+      "text": "crop_square\n1:1",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r35:-trigger-SQUARE",
+      "class": "sc-eb68e7f-2 dNQytQ flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 33,
+      "tag": "button",
+      "type": "button",
+      "text": "crop_portrait\n3:4",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r35:-trigger-PORTRAIT_3_4",
+      "class": "sc-eb68e7f-2 dNQytQ flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 34,
+      "tag": "button",
+      "type": "button",
+      "text": "crop_9_16\n9:16",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r35:-trigger-PORTRAIT",
+      "class": "sc-eb68e7f-2 dNQytQ flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 35,
+      "tag": "button",
+      "type": "button",
+      "text": "1x",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r3b:-trigger-1",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 36,
+      "tag": "button",
+      "type": "button",
+      "text": "x2",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r3b:-trigger-2",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 37,
+      "tag": "button",
+      "type": "button",
+      "text": "x3",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r3b:-trigger-3",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 38,
+      "tag": "button",
+      "type": "button",
+      "text": "x4",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r3b:-trigger-4",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger",
+      "data_testid": ""
+    },
+    {
+      "index": 39,
+      "tag": "button",
+      "type": "button",
+      "text": "\ud83c\udf4c Nano Banana 2\narrow_drop_down",
+      "placeholder": "",
+      "aria_label": "",
+      "id": "radix-:r3g:",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-1 fPutAP jmLZrS sc-3f41cc92-1 eaVRLg",
+      "data_testid": ""
+    }
+  ],
+  "modal_popover_elements": [
+    {
+      "index": 0,
+      "tag": "button",
+      "text": "Hide",
+      "aria_label": "",
+      "role": "",
+      "class": "glue-cookie-notification-bar__accept"
+    },
+    {
+      "index": 1,
+      "tag": "button",
+      "text": "arrow_back\nGo Back",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-7cbbf1fc-2 ewGlDn famhRe jjdvrX"
+    },
+    {
+      "index": 2,
+      "tag": "button",
+      "text": "more_vert\nMore options",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-26aa1721-3 ewGlDn famhRe dUDRen"
+    },
+    {
+      "index": 3,
+      "tag": "button",
+      "text": "search\nSearch",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-cae65d1b-2 ewGlDn famhRe dLeufD"
+    },
+    {
+      "index": 4,
+      "tag": "button",
+      "text": "filter_list\nSort & Filter",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-2 fPutAP blvbdy sc-98525c58-8 iQjEOG"
+    },
+    {
+      "index": 5,
+      "tag": "button",
+      "text": "add\nAdd Media",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-5c4c0aea-1 ewGlDn famhRe eqhuae"
+    },
+    {
+      "index": 6,
+      "tag": "button",
+      "text": "help\nProduct Help",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-51397942-2 ewGlDn famhRe kCsEmL"
+    },
+    {
+      "index": 7,
+      "tag": "button",
+      "text": "settings_2\nView Settings",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-a4925f7f-6 ewGlDn famhRe gdBgFb"
+    },
+    {
+      "index": 8,
+      "tag": "button",
+      "text": "more_vert\nMore",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-49f300e5-1 ewGlDn famhRe gJhmhm"
+    },
+    {
+      "index": 9,
+      "tag": "button",
+      "text": "PRO",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-a14123c8-0 iNGyoc"
+    },
+    {
+      "index": 10,
+      "tag": "button",
+      "text": "dashboard\nAll Media",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 sc-7e7bc024-0 ewGlDn lnCuH fqbaql jcMEtI"
+    },
+    {
+      "index": 11,
+      "tag": "button",
+      "text": "accessibility_new\nCharacters",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql"
+    },
+    {
+      "index": 12,
+      "tag": "button",
+      "text": "movie\nView scenes",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql"
+    },
+    {
+      "index": 13,
+      "tag": "button",
+      "text": "apps_spark_2\nTools",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql"
+    },
+    {
+      "index": 14,
+      "tag": "button",
+      "text": "delete\nView Trash",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql"
+    },
+    {
+      "index": 15,
+      "tag": "button",
+      "text": "left_panel_close\nCollapse",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-5 sc-3ce961f7-0 ewGlDn hGbzYr fqbaql"
+    },
+    {
+      "index": 16,
+      "tag": "button",
+      "text": "Surreal Furry Furniture\nA single colored piece of furniture with long single col",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-2 fPutAP blvbdy sc-d393a63f-6 gAGkIl"
+    },
+    {
+      "index": 17,
+      "tag": "button",
+      "text": "Make a Story\nHelp me create a story by visualizing different options, creating a",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-2 fPutAP blvbdy sc-d393a63f-6 gzpixc"
+    },
+    {
+      "index": 18,
+      "tag": "button",
+      "text": "Serpentine Traffic Jam\nBack view of a long thin single lane twisty infinite road",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-2 fPutAP blvbdy sc-d393a63f-6 gAGkIl"
+    },
+    {
+      "index": 19,
+      "tag": "button",
+      "text": "add_2\nCreate",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-253cad92-0 ewGlDn famhRe joSmHx"
+    },
+    {
+      "index": 20,
+      "tag": "button",
+      "text": "Agent",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-59223abb-3 dmZGYv"
+    },
+    {
+      "index": 21,
+      "tag": "button",
+      "text": "Video \u00b7 8s\ncrop_16_9\nx2",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-1 fPutAP jmLZrS sc-93abd9dc-1 ldbhld"
+    },
+    {
+      "index": 22,
+      "tag": "button",
+      "text": "arrow_forward\nCreate",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-e8425ea6-0 hOBPaw sc-d3791a4f-0 sc-d3791a4f-4 sc-26b30722-5 ewGlDn famhRe jDvIwb"
+    },
+    {
+      "index": 23,
+      "tag": "div",
+      "text": "image\nImage\nplay_circle\nVideo\ncrop_free\nFrames\nchrome_extension\nIngredients\ncrop",
+      "aria_label": "",
+      "role": "menu",
+      "class": "sc-93abd9dc-0 bmwijs DropdownMenuContent"
+    },
+    {
+      "index": 24,
+      "tag": "button",
+      "text": "image\nImage",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 jrTHnf flow_tab_slider_trigger"
+    },
+    {
+      "index": 25,
+      "tag": "button",
+      "text": "play_circle\nVideo",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 jrTHnf flow_tab_slider_trigger"
+    },
+    {
+      "index": 26,
+      "tag": "button",
+      "text": "crop_free\nFrames",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 jrTHnf flow_tab_slider_trigger"
+    },
+    {
+      "index": 27,
+      "tag": "button",
+      "text": "chrome_extension\nIngredients",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 jrTHnf flow_tab_slider_trigger"
+    },
+    {
+      "index": 28,
+      "tag": "button",
+      "text": "crop_9_16\n9:16",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 dNQytQ flow_tab_slider_trigger"
+    },
+    {
+      "index": 29,
+      "tag": "button",
+      "text": "crop_16_9\n16:9",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 dNQytQ flow_tab_slider_trigger"
+    },
+    {
+      "index": 30,
+      "tag": "button",
+      "text": "1x",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger"
+    },
+    {
+      "index": 31,
+      "tag": "button",
+      "text": "x2",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger"
+    },
+    {
+      "index": 32,
+      "tag": "button",
+      "text": "x3",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger"
+    },
+    {
+      "index": 33,
+      "tag": "button",
+      "text": "x4",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger"
+    },
+    {
+      "index": 34,
+      "tag": "button",
+      "text": "Omni Flash\narrow_drop_down",
+      "aria_label": "",
+      "role": "",
+      "class": "sc-16c4830a-1 dnFqQq sc-e7a64add-0 sc-e7a64add-1 fPutAP jmLZrS sc-3f41cc92-1 eaVRLg"
+    },
+    {
+      "index": 35,
+      "tag": "button",
+      "text": "4s",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger"
+    },
+    {
+      "index": 36,
+      "tag": "button",
+      "text": "6s",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger"
+    },
+    {
+      "index": 37,
+      "tag": "button",
+      "text": "8s",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger"
+    },
+    {
+      "index": 38,
+      "tag": "button",
+      "text": "10s",
+      "aria_label": "",
+      "role": "tab",
+      "class": "sc-eb68e7f-2 DoEQM flow_tab_slider_trigger"
+    }
+  ]
+}
