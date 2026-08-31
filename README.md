@@ -78,6 +78,13 @@ Select **`[1] Start Custom Local API Server`** (or run `uvicorn app:app --port 8
 - **REST API Base URL**: `http://127.0.0.1:8000`
 - **Interactive Swagger Docs**: `http://127.0.0.1:8000/docs`
 
+### 5. Launch the termcn Interactive TUI (Optional)
+For a modern, full-screen interactive React/Ink terminal UI:
+```bash
+cd ../flow-cli
+npm start
+```
+
 ---
 
 ## ◈ API Reference
