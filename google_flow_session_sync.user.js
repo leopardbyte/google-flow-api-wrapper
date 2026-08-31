@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         Google Flow Session Exporter & Sync
 // @namespace    https://labs.google/fx/tools/flow
-// @version      1.1.0
-// @description  Export and sync Google Flow authenticated session cookies and OAuth token directly to local API server
+// @version      1.2.0
+// @description  Export and sync Google Flow authenticated session cookies, localStorage, and OAuth token directly to local API server
 // @author       Flow Automation Suite
-// @match        https://labs.google/fx/*
 // @match        https://labs.google/*
+// @match        https://labs.google/fx/*
+// @match        https://labs.google/fx/tools/flow*
+// @match        https://*.google.com/*
 // @grant        GM_cookie
 // @grant        GM.cookie
 // @grant        GM_xmlhttpRequest
@@ -37,8 +39,8 @@
     function addCookies(list) {
       if (Array.isArray(list)) {
         for (const c of list) {
-          if (c && c.name && !cookieMap.has(c.name)) {
-            cookieMap.set(c.name, {
+          if (c && c.name && !cookieMap.has(`${c.domain || ''}_${c.name}`)) {
+            cookieMap.set(`${c.domain || ''}_${c.name}`, {
               name: c.name,
               value: c.value,
               domain: c.domain || "labs.google",
@@ -56,12 +58,13 @@
     // 1. Try GM_cookie.list with multiple scopes
     if (typeof GM_cookie !== "undefined" && typeof GM_cookie.list === "function") {
       const queries = [
-        { url: window.location.href },
         { url: "https://labs.google/fx/tools/flow" },
         { url: "https://labs.google/" },
         { domain: "labs.google" },
         { domain: ".labs.google" },
         { domain: ".google.com" },
+        { domain: "google.com" },
+        { domain: "accounts.google.com" },
         {}
       ];
 
@@ -91,6 +94,10 @@
         const c2 = await GM.cookie.list({ domain: "labs.google" });
         if (c2) addCookies(c2);
       } catch (e) {}
+      try {
+        const c3 = await GM.cookie.list({ domain: ".google.com" });
+        if (c3) addCookies(c3);
+      } catch (e) {}
     }
 
     // 3. Fallback: Include document.cookie entries
@@ -99,8 +106,9 @@
       const trimmed = pair.trim();
       if (!trimmed) continue;
       const [name, ...valParts] = trimmed.split("=");
-      if (name && !cookieMap.has(name)) {
-        cookieMap.set(name, {
+      const key = `labs.google_${name}`;
+      if (name && !cookieMap.has(key)) {
+        cookieMap.set(key, {
           name: name,
           value: valParts.join("="),
           domain: "labs.google",
@@ -116,8 +124,25 @@
     return Array.from(cookieMap.values());
   }
 
+  function getOriginsData() {
+    const origins = [];
+    try {
+      const localStorageData = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        localStorageData.push({ name: key, value: localStorage.getItem(key) });
+      }
+      origins.push({
+        origin: window.location.origin,
+        localStorage: localStorageData
+      });
+    } catch (e) {}
+    return origins;
+  }
+
   async function getSessionPayload() {
     const cookies = await getAllCookies();
+    const origins = getOriginsData();
     let authUser = null;
     let accessToken = null;
 
@@ -136,7 +161,7 @@
       cookies: cookies,
       access_token: accessToken,
       accessToken: accessToken,
-      origins: [],
+      origins: origins,
       user: authUser,
       exportedAt: new Date().toISOString(),
     };

@@ -30,16 +30,119 @@ class SessionManager:
 
             # Capture storage state (cookies, local storage, session tokens)
             storage = context.storage_state()
+
+            # Attempt to fetch live OAuth session profile directly inside browser context
+            try:
+                auth_data = page.evaluate("() => fetch('/fx/api/auth/session').then(r => r.json()).catch(() => null)")
+                if auth_data:
+                    token = auth_data.get("accessToken") or auth_data.get("access_token") or auth_data.get("token")
+                    if token:
+                        storage["access_token"] = token
+                        storage["accessToken"] = token
+                    if auth_data.get("user"):
+                        storage["user"] = auth_data["user"]
+            except Exception:
+                pass
+
             with open(self.session_file, "w", encoding="utf-8") as f:
                 json.dump(storage, f, indent=2)
 
-            print(f"[+] Real session state saved to '{self.session_file}'")
+            cookie_count = len(storage.get("cookies", []))
+            print(f"[+] Real session state saved to '{self.session_file}' ({cookie_count} cookies captured, OAuth token: {bool(storage.get('access_token'))})")
         finally:
             try:
                 if browser.is_connected():
                     browser.close()
             except Exception:
                 pass
+
+    def import_cookie_data(self, data_input) -> dict:
+        """
+        Imports cookie list, Cookie-Editor JSON, or Playwright storage state.
+        Preserves existing valid OAuth tokens and user info, verifies session with Google,
+        and saves complete session to session_state.json.
+        """
+        existing_data = {}
+        if os.path.exists(self.session_file):
+            try:
+                with open(self.session_file, "r", encoding="utf-8") as f:
+                    existing_data = json.load(f)
+            except Exception:
+                existing_data = {}
+
+        if isinstance(data_input, str):
+            try:
+                data = json.loads(data_input.strip())
+            except Exception as e:
+                raise ValueError(f"Invalid JSON string: {e}")
+        else:
+            data = data_input
+
+        if isinstance(data, list):
+            cookies = data
+            origins = existing_data.get("origins", [])
+            user = existing_data.get("user")
+            access_token = existing_data.get("access_token") or existing_data.get("accessToken")
+        elif isinstance(data, dict):
+            cookies = data.get("cookies", [])
+            origins = data.get("origins", existing_data.get("origins", []))
+            user = data.get("user", existing_data.get("user"))
+            access_token = data.get("access_token") or data.get("accessToken") or existing_data.get("access_token")
+        else:
+            raise ValueError("Input must be a JSON array of cookies or a storage dictionary.")
+
+        # Clean / normalize cookies for Playwright & httpx
+        formatted_cookies = []
+        for c in cookies:
+            cookie_dict = {
+                "name": c["name"],
+                "value": c["value"],
+                "domain": c.get("domain", "labs.google"),
+                "path": c.get("path", "/"),
+            }
+            if "secure" in c and c["secure"] is not None:
+                cookie_dict["secure"] = bool(c["secure"])
+            if "httpOnly" in c and c["httpOnly"] is not None:
+                cookie_dict["httpOnly"] = bool(c["httpOnly"])
+            if "sameSite" in c and c["sameSite"]:
+                s = str(c["sameSite"]).capitalize()
+                if s in ["Strict", "Lax", "None"]:
+                    cookie_dict["sameSite"] = s
+            if "expires" in c and c["expires"] is not None and c["expires"] > 0:
+                cookie_dict["expires"] = float(c["expires"])
+            elif "expirationDate" in c and c["expirationDate"] is not None:
+                cookie_dict["expires"] = float(c["expirationDate"])
+
+            formatted_cookies.append(cookie_dict)
+
+        storage_data = {
+            "cookies": formatted_cookies,
+            "origins": origins,
+            "access_token": access_token,
+            "accessToken": access_token,
+            "user": user
+        }
+
+        with open(self.session_file, "w", encoding="utf-8") as f:
+            json.dump(storage_data, f, indent=2)
+
+        # Attempt to verify and retrieve fresh token/user
+        try:
+            client = self.get_authenticated_client()
+            res = client.get("https://labs.google/fx/api/auth/session")
+            if res.status_code == 200:
+                auth_info = res.json()
+                if auth_info.get("accessToken"):
+                    storage_data["access_token"] = auth_info["accessToken"]
+                    storage_data["accessToken"] = auth_info["accessToken"]
+                if auth_info.get("user"):
+                    storage_data["user"] = auth_info["user"]
+                with open(self.session_file, "w", encoding="utf-8") as f:
+                    json.dump(storage_data, f, indent=2)
+        except Exception:
+            pass
+
+        return storage_data
 
     def get_authenticated_client(self) -> httpx.Client:
         """Returns an HTTPX client populated with stored cookies and headers."""

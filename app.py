@@ -103,10 +103,24 @@ def import_session(payload: Dict[str, Any] = Body(...)):
         # Test verification and fetch user profile
         client = get_flow_client()
         token = session_mgr.fetch_bearer_token(client=client.client)
-        session_res = client.client.get("https://labs.google/fx/api/auth/session")
-        user_info = session_res.json().get("user", {}) if session_res.status_code == 200 else {}
-        user_email = user_info.get("email", "Authenticated")
+        if token:
+            storage_data["access_token"] = token
+            storage_data["accessToken"] = token
 
+        try:
+            session_res = client.client.get("https://labs.google/fx/api/auth/session")
+            if session_res.status_code == 200:
+                user_info = session_res.json().get("user", {})
+                if user_info:
+                    storage_data["user"] = user_info
+        except Exception:
+            user_info = user_data or {}
+
+        # Re-save full unified session state
+        with open(session_mgr.session_file, "w", encoding="utf-8") as f:
+            json.dump(storage_data, f, indent=2)
+
+        user_email = (storage_data.get("user") or {}).get("email", "Authenticated")
         print(f"[+] [Session Sync] Session verified! Active user: {user_email}")
 
         return {

@@ -34,21 +34,43 @@ class FlowUIAutomator:
         aspect_target = "9:16" if aspect_ratio in ["9:16", "portrait", "PORTRAIT"] else "16:9"
         res_target = "720p" if "720" in str(resolution) else "360p"
 
-        # Load session cookies
+        # Load session cookies & storage state
         with open(self.session_mgr.session_file, "r", encoding="utf-8") as f:
             storage = json.load(f)
 
         cookies_raw = storage if isinstance(storage, list) else storage.get("cookies", [])
-        cookies = []
+        formatted_cookies = []
         for c in cookies_raw:
-            cd = {
+            cookie_dict = {
                 "name": c["name"],
                 "value": c["value"],
-                "url": "https://labs.google"
             }
-            cookies.append(cd)
+            domain = c.get("domain", "")
+            if domain:
+                cookie_dict["domain"] = domain
+                cookie_dict["path"] = c.get("path", "/")
+            elif c.get("url"):
+                cookie_dict["url"] = c["url"]
+            elif c["name"].startswith("__Host-"):
+                cookie_dict["url"] = "https://labs.google"
+            else:
+                cookie_dict["domain"] = "labs.google"
+                cookie_dict["path"] = "/"
 
-        print(f"[+] Launching CloakBrowser UI Automator (headless={headless}, humanize=False)...")
+            if "secure" in c and c["secure"] is not None:
+                cookie_dict["secure"] = bool(c["secure"])
+            if "httpOnly" in c and c["httpOnly"] is not None:
+                cookie_dict["httpOnly"] = bool(c["httpOnly"])
+            if "sameSite" in c and c["sameSite"]:
+                s = str(c["sameSite"]).capitalize()
+                if s in ["Strict", "Lax", "None"]:
+                    cookie_dict["sameSite"] = s
+            if "expires" in c and c["expires"] is not None and c["expires"] > 0:
+                cookie_dict["expires"] = float(c["expires"])
+
+            formatted_cookies.append(cookie_dict)
+
+        print(f"[+] Launching CloakBrowser UI Automator (headless={headless}, humanize=False, {len(formatted_cookies)} cookies attached)...")
         launch_args = ["--start-maximized"] if not headless else []
         browser = launch(headless=headless, humanize=False, args=launch_args)
         
@@ -58,8 +80,20 @@ class FlowUIAutomator:
         else:
             context_kwargs["viewport"] = {"width": 1920, "height": 1080}
 
-        context = browser.new_context(**context_kwargs)
-        context.add_cookies(cookies)
+        storage_state_payload = {
+            "cookies": formatted_cookies,
+            "origins": storage.get("origins", []) if isinstance(storage, dict) else []
+        }
+
+        try:
+            context = browser.new_context(storage_state=storage_state_payload, **context_kwargs)
+        except Exception:
+            context = browser.new_context(**context_kwargs)
+            if formatted_cookies:
+                try:
+                    context.add_cookies(formatted_cookies)
+                except Exception as ce:
+                    print(f"[!] Warning attaching cookies: {ce}")
         page = context.new_page()
 
         try:

@@ -36,7 +36,7 @@ def main():
     print_session_card(session_summary, live_credits=live_credits)
     print_menu()
 
-    choice = console.input("\n[bold blue]Select action[/bold blue] [dim]([bold white]1[/bold white]/2/3/4)[/dim]: ").strip() or "1"
+    choice = console.input("\n[bold blue]Select action[/bold blue] [dim]([bold white]1[/bold white]/2/3/4/5)[/dim]: ").strip() or "1"
 
     if choice == "1":
         uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=False)
@@ -44,6 +44,43 @@ def main():
         session_mgr.record_authenticated_traffic(target_url=target_url)
     elif choice == "4":
         session_mgr.capture_interactive_session(target_url=target_url)
+    elif choice == "5":
+        console.print("\n[bold blue]✦ Import Cookies / Storage State[/bold blue]")
+        console.print("[dim]Tip: In Chrome/Edge on https://labs.google/fx/tools/flow, click Cookie-Editor -> 'Export' -> 'Export as JSON', then paste here.[/dim]\n")
+        
+        clipboard_content = None
+        try:
+            import subprocess
+            proc = subprocess.run(["powershell", "-NoProfile", "-Command", "Get-Clipboard"], capture_output=True, text=True, timeout=3)
+            cb_text = proc.stdout.strip()
+            if cb_text.startswith("[") or cb_text.startswith("{"):
+                clipboard_content = cb_text
+        except Exception:
+            pass
+
+        raw_json = None
+        if clipboard_content:
+            console.print("[bold green]Found JSON on clipboard![/bold green]")
+            use_cb = console.input("[bold white]Import from clipboard? (Y/n): [/bold white]").strip().lower()
+            if use_cb != "n":
+                raw_json = clipboard_content
+
+        if not raw_json:
+            console.print("[dim]Paste your cookie JSON below and press Enter:[/dim]")
+            raw_json = console.input("[bold cyan]JSON: [/bold cyan]").strip()
+
+        try:
+            saved_state = session_mgr.import_cookie_data(raw_json)
+            c_count = len(saved_state.get("cookies", []))
+            u_email = (saved_state.get("user") or {}).get("email", "Authenticated")
+            tok = bool(saved_state.get("access_token"))
+            console.print(Panel(
+                f"[bold green]✓ Successfully imported {c_count} cookies![/bold green]\nUser: {u_email} • Token: {'Active' if tok else 'Refreshed on request'}\nSaved to '{session_mgr.session_file}'",
+                border_style="green",
+                title="Session Imported"
+            ))
+        except Exception as e:
+            console.print(Panel(f"[bold red]Import Error:[/bold red] {e}", border_style="red"))
     elif choice == "3":
         try:
             console.print("\n[bold blue]✦ Initializing FlowClient API...[/bold blue]")

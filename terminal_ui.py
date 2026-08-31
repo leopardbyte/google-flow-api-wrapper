@@ -223,8 +223,13 @@ def print_menu():
     )
     table.add_row(
         "4",
-        "Capture New Session",
-        "Manual browser login capture fallback (Tampermonkey userscript recommended)"
+        "Capture New Session (Browser)",
+        "Spawns CloakBrowser for 1-time manual login capture"
+    )
+    table.add_row(
+        "5",
+        "Paste Cookie JSON (Clipboard)",
+        "Imports cookies exported from Cookie-Editor extension or JSON string"
     )
 
     panel = Panel(
