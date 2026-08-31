@@ -3,5 +3,6 @@ playwright
 cloakbrowser
 fastapi
 uvicorn
+rich
 
 

@@ -3,17 +3,28 @@ import json
 import time
 import base64
 import uvicorn
-from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Body
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 
 from session import SessionManager
 from client import FlowClient
+from terminal_ui import print_server_dashboard, get_session_summary
 
 app = FastAPI(
     title="Google Flow (Omni 1.1 Flash) Local API",
     description="Local REST API server & automation wrapper for Google Flow AI Video Studio",
     version="1.1.0"
+)
+
+# Enable CORS for Tampermonkey / browser extensions & frontend callers
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Initialize Session & Client
@@ -45,40 +56,14 @@ def get_flow_client() -> FlowClient:
 
 @app.on_event("startup")
 def print_terminal_showcase():
+    session_summary = get_session_summary(session_file=session_mgr.session_file)
+    credits_info = None
     try:
         client = get_flow_client()
         credits_info = client.get_credits()
-        credits = credits_info.get("credits", "N/A")
-        tier = credits_info.get("userPaygateTier", "N/A")
-
-        session_res = client.client.get("https://labs.google/fx/api/auth/session")
-        user_info = session_res.json().get("user", {}) if session_res.status_code == 200 else {}
-        user_name = user_info.get("name", "Authenticated User")
-        user_email = user_info.get("email", "N/A")
-
     except Exception:
-        credits = "Error fetching"
-        tier = "N/A"
-        user_name = "Session Active"
-        user_email = "N/A"
-
-    print("\n" + "=" * 65)
-    print(" 🚀 GOOGLE FLOW (OMNI 1.1 FLASH) - LOCAL REST API SERVER")
-    print("=" * 65)
-    print(f" 👤 Account    : {user_name} ({user_email})")
-    print(f" 💳 Live Credits: {credits} credits (Tier: {tier})")
-    print(f" 🌐 Local Server: http://127.0.0.1:8000")
-    print(f" 📖 Interactive OpenAPI Docs: http://127.0.0.1:8000/docs")
-    print("-" * 65)
-    print(" 📋 AVAILABLE LOCAL ENDPOINTS:")
-    print("   • GET  /                    -> Server Health & Summary")
-    print("   • GET  /api/credits         -> Get live credit balance")
-    print("   • GET  /api/projects        -> List user projects")
-    print("   • POST /api/create-project  -> Create a new project")
-    print("   • POST /api/generate            -> Generate video (JSON payload, optional start/end frames)")
-    print("   • POST /api/generate-with-image -> Generate video with HTTP file upload (Multipart Form)")
-    print("   • POST /api/check-status        -> Check status of generation tasks")
-    print("=" * 65 + "\n")
+        pass
+    print_server_dashboard(session_summary=session_summary, live_credits=credits_info)
 
 @app.get("/")
 def root():
@@ -87,6 +72,71 @@ def root():
         "service": "Google Flow (Omni 1.1 Flash) Local API Wrapper",
         "docs_url": "http://127.0.0.1:8000/docs"
     }
+
+@app.post("/api/session/import")
+def import_session(payload: Dict[str, Any] = Body(...)):
+    """
+    Receives exported cookies & session state from the Tampermonkey userscript,
+    saves them to session_state.json, and immediately verifies session connectivity.
+    """
+    try:
+        cookies = payload.get("cookies", payload if isinstance(payload, list) else [])
+        if not cookies:
+            raise ValueError("No cookies provided in session payload.")
+
+        access_token = payload.get("access_token") or payload.get("accessToken")
+        user_data = payload.get("user")
+
+        storage_data = {
+            "cookies": cookies,
+            "access_token": access_token,
+            "accessToken": access_token,
+            "user": user_data,
+            "origins": payload.get("origins", [])
+        }
+
+        with open(session_mgr.session_file, "w", encoding="utf-8") as f:
+            json.dump(storage_data, f, indent=2)
+
+        print(f"\n[+] [Session Sync] Successfully saved {len(cookies)} cookies and OAuth credentials to '{session_mgr.session_file}'")
+
+        # Test verification and fetch user profile
+        client = get_flow_client()
+        token = session_mgr.fetch_bearer_token(client=client.client)
+        session_res = client.client.get("https://labs.google/fx/api/auth/session")
+        user_info = session_res.json().get("user", {}) if session_res.status_code == 200 else {}
+        user_email = user_info.get("email", "Authenticated")
+
+        print(f"[+] [Session Sync] Session verified! Active user: {user_email}")
+
+        return {
+            "status": "success",
+            "message": "Session imported and verified successfully.",
+            "user": user_info,
+            "token_active": bool(token),
+            "cookie_count": len(cookies)
+        }
+    except Exception as e:
+        print(f"[-] [Session Sync Error] {e}")
+        raise HTTPException(status_code=400, detail=f"Failed to import/verify session: {str(e)}")
+
+@app.get("/api/session/status")
+def session_status():
+    """Checks the active session file and token validity."""
+    if not os.path.exists(session_mgr.session_file):
+        return {"status": "unauthenticated", "message": "No session_state.json found."}
+    try:
+        client = get_flow_client()
+        session_res = client.client.get("https://labs.google/fx/api/auth/session")
+        if session_res.status_code == 200:
+            user_info = session_res.json().get("user", {})
+            return {
+                "status": "authenticated",
+                "user": user_info
+            }
+        return {"status": "invalid_or_expired", "code": session_res.status_code}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
 
 @app.get("/api/credits")
 def get_credits():

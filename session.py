@@ -1,6 +1,7 @@
 import json
 import os
 import httpx
+from typing import Optional
 from cloakbrowser import launch
 from config import SESSION_FILE, DEFAULT_HEADERS
 
@@ -70,22 +71,41 @@ class SessionManager:
 
         return client
 
-    def fetch_bearer_token(self, client: httpx.Client = None) -> str:
+    def fetch_bearer_token(self, client: httpx.Client = None) -> Optional[str]:
         """
         Calls the session authentication endpoint using session cookies
-        to retrieve the OAuth Bearer token.
+        to retrieve the OAuth Bearer token, or falls back to stored access_token.
         """
         if client is None:
-            client = self.get_authenticated_client()
+            try:
+                client = self.get_authenticated_client()
+            except Exception:
+                client = None
 
-        res = client.get("https://labs.google/fx/api/auth/session")
-        if res.status_code != 200:
-            raise RuntimeError(f"Failed to fetch session token: HTTP {res.status_code} - {res.text}")
+        if client is not None:
+            try:
+                res = client.get("https://labs.google/fx/api/auth/session")
+                if res.status_code == 200:
+                    data = res.json()
+                    token = data.get("accessToken") or data.get("access_token") or data.get("token")
+                    if token:
+                        return token
+            except Exception:
+                pass
 
-        data = res.json()
-        # Look for access token in typical NextAuth session response keys
-        token = data.get("accessToken") or data.get("access_token") or data.get("token")
-        return token
+        # Fallback: check stored access_token in session_state.json
+        if os.path.exists(self.session_file):
+            try:
+                with open(self.session_file, "r", encoding="utf-8") as f:
+                    storage = json.load(f)
+                    if isinstance(storage, dict):
+                        token = storage.get("access_token") or storage.get("accessToken")
+                        if token:
+                            return token
+            except Exception:
+                pass
+
+        return None
 
     def get_authenticated_api_client(self) -> httpx.Client:
         """

@@ -55,13 +55,20 @@ pip install -r requirements.txt
 playwright install chromium
 ```
 
-### 3. Capture Your Google Session
-Run the interactive CLI to export your active Google Flow session cookies:
+### 3. Sync Your Authenticated Session
 
+#### Option A: 1-Click Tampermonkey Sync (Recommended)
+Bypasses Google BotGuard anti-automation challenges entirely by exporting directly from your daily browser:
+1. Install the included **[`google_flow_session_sync.user.js`](google_flow_session_sync.user.js)** in Tampermonkey (Chrome / Brave / Edge).
+2. Start the local server: `python main.py` -> `[1] Start Custom Local API Server`.
+3. Open **[Google Flow](https://labs.google/fx/tools/flow)** while logged in and click **"⚡ Sync to Local Server (:8000)"** in the bottom-right widget.
+
+#### Option B: Browser Capture Fallback
+Run the interactive CLI:
 ```bash
 python main.py
 ```
-Select **`[4] Capture New Session`**, log in with your Google account in the opened browser window, and the session state will be automatically saved locally to `session_state.json`.
+Select **`[4] Capture New Session`** to manually log in within a spawned browser session.
 
 ### 4. Start the Local API Server
 ```bash
